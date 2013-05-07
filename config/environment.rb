@@ -19,6 +19,7 @@ require 'sinatra'
 require "sinatra/reloader" if development?
 
 require 'erb'
+require 'oauth2'
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
@@ -31,3 +32,8 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
+
+if development?
+  google_config = YAML.load(File.read(APP_ROOT.join("config", "application.yml")))
+  google_config.each {|k, v| ENV[k] = v}
+end
