@@ -1,0 +1,11 @@
+<h1>profile for <%= @person.nickname %><a href="/signout"> signout </a></h1>
+
+<img width="500px" height="500px" src="<%= @person.image.url %>">
+<ul>
+<h1><% @person.attributes.each do |k, v| %> </h1>
+<li> <%= k %> </li>
+  <ol>
+    <li><%= v %></li>
+    </ol>
+<% end%>
+</ul>
